@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <link href="css/login.css" rel="stylesheet" type="text/css">
+    <title>Road Trip</title>
+    <script>
+      const Store = require('electron-store');
+      const store = new Store();
+    </script>
+
+  </head>
+  <body>
+    <h1>Welcome to Road Trip</h1>
+    <div id="gSignInWrapper">
+      <div id="customBtn" class="customGPlusSignIn">
+        <span class="buttonText" id="signin"><img src="../img/google_icon.png" width="40px" height = "40px" align="center">Google Sign In</span>
+      </div> <br /><br />
+      <div id="customBtn" class="customGPlusSignIn">
+        <span class="buttonText" id="guestSignIn">Guest Sign In</span>
+      </div>
+    </div>
+    <div id="name"></div>
+    <script>
+      var ipc = require('electron').ipcRenderer;
+      var authButton = document.getElementById('signin');
+      authButton.addEventListener('click', function(){
+          ipc.send('signin');
+      });
+      ipc.on('message', function(emitter, data){
+        if(data != "success!"){
+          document.getElementById('message').innerHTML = data;
+        }
+      })
+
+      var guestButton = document.getElementById('guestSignIn');
+      guestButton.addEventListener('click', function(){
+        window.location = "itinerary.html"
+      })
+    </script>
+    <div id='message'></div>
+  </body>
+</html>

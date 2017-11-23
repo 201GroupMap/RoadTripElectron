@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="css/map.css" rel="stylesheet">
+    <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
+
+    <title>Places Searchbox</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map, #tooltip-container {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #description {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      #infowindow-content .title {
+        font-weight: bold;
+      }
+
+      #infowindow-content {
+        display: none;
+      }
+
+      #map #infowindow-content {
+        display: inline;
+      }
+
+      .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      #title {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+      }
+      #target {
+        width: 345px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="info-panel-buttons-wrapper" class="row">
+      <div class="col-md-4">
+        <div id="home-button" class="info-panel-button">
+          <i class="fa fa-home"></i> Home
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div id="save-button" class="info-panel-button">
+          <i id="save-icon" class="fa fa-floppy-o"></i> Save
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div id="settings-button" class="info-panel-button">
+          <i class="fa fa-cog"></i> Settings
+        </div>
+      </div>
+    </div>
+    <div id="sidebar">
+      <div id="info-panel" class="panel container-fluid">
+        <div class="panel-title">
+          <input id="itinerary-name-input" type="text" placeholder="Add a name">
+        </div>
+      </div>
+      <div id="start-panel" class="panel">
+        <div class="panel-title">
+          <h2>Starting Point</h2>
+          <div id="start-search-bar-wrapper" class="search-bar-wrapper">
+            <input id="start-search-bar" class="controls" type="text" placeholder="Search Starting Point">
+          </div>
+        </div>
+        <div id="start-panel-content" class="panel-content">
+          <div class="panel-img-wrapper"></div>
+          <div class="panel-address">No origin yet</div>
+        </div>
+      </div>
+      <div id="stops-panel" class="panel" style="display: none;">
+        <div class="panel-title">
+          <h2>Stops</h2>
+        </div>
+        <div id="stops-list"></div>
+      </div>
+      <div id="end-panel" class="panel">
+        <div class="panel-title">
+          <h2>Destination</h2>
+          <div id="end-search-bar-wrapper" class="search-bar-wrapper">
+            <input id="end-search-bar" class="controls" type="text" placeholder="Search Destination">
+          </div>
+        </div>
+        <div id="end-panel-content" class="panel-content">
+          <div class="panel-img-wrapper"></div>
+          <div class="panel-address">No destination yet</div>
+        </div>
+      </div>
+      <div id="route-search-panel" class="panel">
+        <div class="panel-title">
+          <h2>Search along Route</h2>
+          <button id="route-search-button" class="btn btn-sm">Go!</button>
+        </div>
+        <div class="panel-content-route">
+          <div id="route-search-radius-wrapper" class="form-inline">
+            <label class="mr-sm-2" for="route-search-radius-select">Distance from route</label>
+            <select id="route-search-radius-select" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+              <option value="40" selected>40 miles</option>
+              <option value="80">80 miles</option>
+              <option value="120">120 miles</option>
+            </select>
+          </div>
+          <!--
+          <div id="route-options-wrapper">
+            <label>Filters</label>
+            <ul id="route-options-list">
+              <li class="route-option">Lodging</li>
+              <li class="route-option">Attractions</li>
+              <li class="route-option">Hikes</li>
+              <li class="route-option">FOOD</li>
+            </ul>
+          </div>
+        -->
+        </div>
+      </div>
+    </div>
+    <div id="main">
+      <div id="stops-search-bar-wrapper" class="search-bar-wrapper" style="display: none;">
+        <input id="stops-search-bar" class="controls" type="text" placeholder="Add a stop...">
+      </div>
+      <div id="map"></div>
+      <div id="tooltip-container">
+      </div>
+    </div>
+    <div id="settings-modal" class="modal fade">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Itinerary Settings</h2>
+          </div>
+          <div class="modal-body">
+            <!-- Visibility Select -->
+            <div class="form-group">
+              <label for="visibility-select">Itinerary Visibility</label>
+              <select class="form-control" id="visibility-select" style="width: 120px;">
+                <option value="public" selected>Public</option>
+                <option value="private">Private</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="shared-users-input">Share</label>
+              <input type="text" class="form-control" id="shared-users-input" placeholder="Type the name of a user">
+            </div>
+
+            <div class="form-group">
+              <label for="shared-users">Shared Users</label>
+              <select multiple class="form-control" id="shared-users">
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+  </div>
+    <!--
+    <script>
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initAutocomplete() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 34.021707, lng: -118.288242},
+          zoom: 15,
+          mapTypeId: 'roadmap'
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+
+          markers.forEach((marker) => {
+            marker.setMap(null);
+          });
+          /*
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          */
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            let iconURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png";
+            var icon = {
+              url: iconURL,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            let marker = new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location,
+              optimized: false
+            });
+
+            marker.addListener('click', function (event) {
+              console.log("marker clicked", event);
+              let mouseEvent = event.va;
+              let title = this.title;
+            });
+
+            markers.push(marker);
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      }
+
+    </script>
+  -->
+  <script src="js/MapEditor.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/map.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMNN3WNSG_h7EX8RXhI3s9ux7Q6Hyqg1s&libraries=places&callback=m.init"
+       ></script>
+  <script src="js/RouteBoxer.js"></script>
+
+  </body>
+</html>

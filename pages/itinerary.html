@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/itinerary.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>window.$ = window.jQuery = require('jquery');</script>
+<title>RoadTrip</title>
+</head>
+<body>
+	<div class="tab">
+	  <button class="tablinks" onclick="openItin('myitin')" id="myitinbutton">My itineraries</button>
+	  <button class="tablinks" onclick="openItin('publicitin')" id="publicitinbutton" style="margin-left: -5px">Public itineraries</button>
+	  <button class="tablinks" onclick="window.location='map.html'" id="newitinbutton" style="margin-left: -5px">Create new itinerary</button>
+	  <div class="dropdown">
+		  <img id="profile_img" src="http://viterbi.usc.edu/directory/images/2dafc9bc59c736884ae57b7235d5bc67.jpg">
+		  <div class="dropdown-content">
+		  	<button id="logout" onclick="logout()">Logout</button>
+		  </div>
+	  </div>
+	</div>
+	<div id="myitin" class="tabcontent">
+	 	<h3>My itinerary</h3>
+	</div>
+	
+	<div id="publicitin" class="tabcontent">
+	  <h3>Public itinerary</h3>
+	</div>
+
+	<!-- <div class="itinerary">
+			<img src="http://www.herl.pitt.edu/sites/default/files/images/map-close.jpg">
+			<p>itinerary_1</p>
+			<span class="fa fa-star checked"></span>
+			<span class="fa fa-star checked"></span>
+			<span class="fa fa-star checked"></span>
+			<span class="fa fa-star"></span>
+			<span class="fa fa-star"></span>
+		</div> -->
+</body>
+<script src="js/itinerary.js"></script>
+</html>
