@@ -196,7 +196,7 @@ MapEditor.prototype.searchWithDelay = function (bounds, delay) {
             <div class="infowindow-content-wrapper">
               <h3>${place.name}</h3>
               ${place.vicinity ? `<p>${place.vicinity}</p>` : ""}
-              ${place.rating ? `<p>${place.rating}</p>` : ""}
+              ${place.rating ? `<p>${place.rating}/5</p>` : ""}
             </div>
           </div>
         `;
@@ -270,6 +270,7 @@ MapEditor.prototype.removeStop = function (placeId) {
   if (this.stops.size === 0) {
     $("#stops-panel").slideUp("fast");
   }
+  this.drawRoute();
 }
 
 MapEditor.prototype.getThumbnailURL = function () {
@@ -339,12 +340,16 @@ MapEditor.prototype.save = function () {
     url: BACKEND_URL + "/Itinerary",
     data: JSON.stringify(self.getSaveData()),
     success: function (data) {
+      $("#save-icon").addClass("fa-floppy-o");
+      $("#save-icon").removeClass("fa-refresh");
+      $("#save-icon").removeClass("fa-spin");
       console.log(data);
     }
   })
 }
 
 MapEditor.prototype.getOwnerName = function () {
+  this.ownerName = "Zexia Zhang";
   return this.ownerName;
 }
 
@@ -367,7 +372,8 @@ MapEditor.prototype.getSaveData = function () {
     _id: {
       $oid: this.id
     },
-  }
+  };
+  return data;
 }
 
 MapEditor.prototype.getTripTime = function () {
@@ -576,6 +582,18 @@ MapEditor.prototype.drawRoute = function () {
     this.routeBounds = rb.box(result.routes[0].overview_path, getSearchRadius());
     //this.routeSearch();
   });
+}
+
+MapEditor.prototype.swapStops = function (index1, index2) {
+  console.log("stops was", this.stops);
+  let mapEntries = Array.from(this.stops.entries());
+  let temp = mapEntries[index1];
+  mapEntries[index1] = mapEntries[index2];
+  mapEntries[index2] = temp;
+  this.stops = new Map(mapEntries);
+  console.log(mapEntries);
+  console.log("stops is now", this.stops);
+  this.drawRoute();
 }
 
 MapEditor.prototype.getWaypoints = function () {

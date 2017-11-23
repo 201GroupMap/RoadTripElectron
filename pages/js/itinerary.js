@@ -56,6 +56,13 @@ var noItin = function(type) {
 	$("#"+type).append("<p>No itineraries available</p>");
 }
 
+var newItin = function() {
+	if(store.has("itinid")) {
+		store.delete("itinid");
+	}
+	window.location = "map.html";
+}
+
 var endpoint = "http://roadtrip-env.us-west-1.elasticbeanstalk.com/";
 
 
@@ -81,6 +88,13 @@ else {
 			}
 			else noItin("myitin");
 		});
+	// wait for AWS to publish
+	// $.get(endpoint+"SharedItinerary/"+user_name, function(data, status) {
+	// 		if(data.length!=0) {
+	// 			parseItin("shareditin", data);
+	// 		}
+	// 		else noItin("shareditin");
+	// 	});
 	$("#myitinbutton").click();
 }
 

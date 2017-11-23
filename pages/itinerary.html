@@ -11,7 +11,8 @@
 	<div class="tab">
 	  <button class="tablinks" onclick="openItin('myitin')" id="myitinbutton">My itineraries</button>
 	  <button class="tablinks" onclick="openItin('publicitin')" id="publicitinbutton" style="margin-left: -5px">Public itineraries</button>
-	  <button class="tablinks" onclick="window.location='map.html'" id="newitinbutton" style="margin-left: -5px">Create new itinerary</button>
+	  <button class="tablinks" onclick="openItin('shareditin')" id="publicitinbutton" style="margin-left: -5px">Itineraries shared with me</button>
+	  <button class="tablinks" onclick="newItin()" id="newitinbutton" style="margin-left: -5px">Create new itinerary</button>
 	  <div class="dropdown">
 		  <img id="profile_img" src="http://viterbi.usc.edu/directory/images/2dafc9bc59c736884ae57b7235d5bc67.jpg">
 		  <div class="dropdown-content">
@@ -25,6 +26,10 @@
 	
 	<div id="publicitin" class="tabcontent">
 	  <h3>Public itinerary</h3>
+	</div>
+
+	<div id="shareditin" class="tabcontent">
+	  <h3>Itineraries shared with me</h3>
 	</div>
 
 	<!-- <div class="itinerary">

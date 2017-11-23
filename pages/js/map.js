@@ -1,9 +1,3 @@
-/*requirejs.config({
-  paths: {
-    'Sortable': 'http://rubaxa.github.io/Sortable/Sortable'
-  }
-});
-require(['Sortable']);*/
 const Sortable = require('sortablejs');
 
 $(document).ready(function () {
@@ -33,10 +27,6 @@ $(document).ready(function () {
   });
 
   $("#home-button").click(function () {
-    // delete current itinierary
-    if(store.has("itinid")){
-      store.delete("itinid");
-    }
     window.location = "itinerary.html";
   });
 
