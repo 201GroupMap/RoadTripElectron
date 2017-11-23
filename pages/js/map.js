@@ -27,6 +27,9 @@ $(document).ready(function () {
   });
 
   $("#home-button").click(function () {
+    if(store.has("itinid")){
+      store.delete("itinid");
+    }
     window.location = "itinerary.html";
   });
 
