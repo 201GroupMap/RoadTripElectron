@@ -60,12 +60,14 @@ function initialize() {
     polyline = new google.maps.Polyline({
         path: [],
         strokeColor: '#4885ed',
-        strokeWeight: 3
+        strokeWeight: 3,
+        strokeOpacity: 0
     });
     poly2 = new google.maps.Polyline({
         path: [],
         strokeColor: '#4885ed',
-        strokeWeight: 3
+        strokeWeight: 3,
+        strokeOpacity: 0
     });
 }
 
@@ -87,12 +89,14 @@ function calcRoute() {
     polyline = new google.maps.Polyline({
         path: [],
         strokeColor: '#4885ed',
-        strokeWeight: 3
+        strokeWeight: 3,
+        strokeOpacity: 0
     });
     poly2 = new google.maps.Polyline({
         path: [],
         strokeColor: '#4885ed',
-        strokeWeight: 3
+        strokeWeight: 3,
+        strokeOpacity: 0
     });
     // Create a renderer for directions and bind it to the map.
     var rendererOptions = {
@@ -101,8 +105,17 @@ function calcRoute() {
         suppressMarkers: true,
         polylineOptions : new google.maps.Polyline({
           strokeColor: "#fd5c63",
-          strokeOpacity: 1.0,
-          strokeWeight: 7
+          strokeWeight: 7,
+          strokeOpacity: 0,
+          icons: [{
+            icon: {
+              path: 'M 0,-1 0,1',
+              strokeOpacity: 1,
+              scale: 4
+            },
+            offset: '0',
+            repeat: '20px'
+          }],
         })
     }
     directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
