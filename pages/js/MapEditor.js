@@ -78,6 +78,7 @@ MapEditor.prototype.loadPreviousData = function (results) {
     this.sharedUsers.push(username);
   }
   // Set the name
+  this.name = results.name;
   $("#itinerary-name-input").val(results.name);
 }
 
