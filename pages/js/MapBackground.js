@@ -172,8 +172,8 @@ function calcRoute() {
 
 
 
-var step = 1; // 5; // metres
-var tick = 1; // milliseconds
+var step = 2; // 5; // metres
+var tick = 10; // milliseconds
 var eol;
 var k = 0;
 var stepnum = 0;
