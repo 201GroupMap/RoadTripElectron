@@ -9,7 +9,7 @@ const PHOTO_WIDTH = 200;
 var m = new MapEditor();
 
 function MapEditor () {
-  this.ownerName = getUserName();
+  this.username = getUsername();
 
   this.mapContainer = document.getElementById("map");
   this.startSearchBarContainer = document.getElementById("start-search-bar");

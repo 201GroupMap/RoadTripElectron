@@ -6,6 +6,7 @@ function getItineraryId () {
   return itineraryId;
 }
 
-function getUserName () {
-  return store.get("user").name;
+function getUsername () {
+  let user = store.get("user");
+  return user.name;
 }
