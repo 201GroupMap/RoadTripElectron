@@ -9,7 +9,7 @@ const PHOTO_WIDTH = 200;
 var m = new MapEditor();
 
 function MapEditor () {
-  this.ownerName = "Daniel Ho";
+  this.ownerName = getUserName();
 
   this.mapContainer = document.getElementById("map");
   this.startSearchBarContainer = document.getElementById("start-search-bar");
@@ -73,9 +73,9 @@ MapEditor.prototype.loadPreviousData = function (results) {
     this.getPlaceInfo(placeId, this.addStop.bind(this));
   }
   // Add shared users
-  for (let i = 0; i < results.sharedUsers; i++) {
-    let username = results.sharedUsers[i];
-    this.sharedUsers.push(username);
+  for (let i = 0; i < results.shared_users; i++) {
+    let username = results.shared_users[i];
+    this.shared_users.push(username);
   }
   // Set the name
   this.name = results.name;
@@ -369,7 +369,7 @@ MapEditor.prototype.getSaveData = function () {
     stops: Array.from(this.stops.keys()),
     total_trip_time: this.getTripTime(),
     thumbnail_url: this.getThumbnailURL(),
-    sharedUsers: this.sharedUsers,
+    shared_users: this.sharedUsers,
     _id: {
       $oid: this.id
     },
