@@ -369,7 +369,7 @@ MapEditor.prototype.getSaveData = function () {
     stops: Array.from(this.stops.keys()),
     total_trip_time: this.getTripTime(),
     thumbnail_url: this.getThumbnailURL(),
-    shared_users: this.sharedUsers,
+    sharedUsers: this.sharedUsers,
     _id: {
       $oid: this.id
     },

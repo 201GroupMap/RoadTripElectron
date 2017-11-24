@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="css/itinerary.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<script>
+	window.$ = window.jQuery = require('jquery');
+	</script>
+	<title>RoadTrip</title>
+</head>
+<body>
+	<div class="tab">
+		<button class="tablinks" id="myitinbutton" onclick="openItin('myitin')">My itineraries</button> <button class="tablinks active" id="publicitinbutton" onclick="openItin('publicitin')" style="margin-left: -5px">Public itineraries</button> <button class="tablinks" id="publicitinbutton" onclick="openItin('shareditin')" style="margin-left: -5px">Itineraries shared with me</button> <button class="tablinks" id="newitinbutton" onclick="newItin()" style="margin-left: -5px">Create new itinerary</button>
+		<div class="dropdown">
+			<img id="profile_img" src="https://lh6.googleusercontent.com/-qDkw-d4AZSQ/AAAAAAAAAAI/AAAAAAAAAD0/r-dW2Ft8nsg/s96-c/photo.jpg">
+			<div class="dropdown-content">
+				<button id="logout" onclick="logout()">Logout</button>
+			</div>
+		</div>
+	</div>
+	<div class="tabcontent" id="myitin" style="display: none;">
+		<h3>My itinerary</h3>
+		<p>No itineraries available</p>
+	</div>
+	<div class="tabcontent" id="publicitin" style="">
+		<h3>Public itinerary</h3>
+		<div class="itinerary">
+			<div class="container">
+				<img src="https://maps.googleapis.com/maps/api/staticmap?&amp;size=400x400&amp;markers=color:red%7C34.0223519,-118.28511700000001&amp;markers=color:red%7C45.52306220000001,-122.67648150000002&amp;markers=color:red%7C47.6062095,-122.3320708&amp;path=weight:3%7Ccolor:blue%7Cenc:kfsnE`i~pUwoGyxF}yFngLqeFbiHksJxnFabMbvGuwJ~mJkxEnyH}qMhoGgwHvxBk_Gd`E_gLdwJm}KfaI_jE|xDsjN|sBusFlcMkrCa}B}aEb{C_|Hx{EqyP~pDw|l@vfp@aiw@nhgAcso@`_g@w|d@b}a@qmJxhNaiKnkPevg@~k]ebe@lqa@ugVhx/unSpqNm|b@|pX{vLrlNk}^t{Z{pUtvH_zPfbD_kM|eFu}MngLk`NlyQiyJxlCqzHn@y|JnAgqB_mBynK_tFgkIif@_cH`gBqoCdsEkt/~fKa~Gja@icTbdIm}e@tuG_xKjkC{tKexAa`JjaDk_CtkBwMhxNmqBz~WsbGhuJo~LtjMopJ`_LwsOp_Jmva@n_ViaMnqGugKpn@efd@teAslR|cCwr]su@szm@ic@_tk@niCyvNbcGufVt`CywLh[idMd|Ii`Ob_BueJ{RixO{jGs`DuIcrHvaAwaHddGo`F`oBaaDnrDqkBz|CykCiNctMw~FwwI{tHgjF{lCohCabD}vPyeFuoG`fImtLbrIckHx{AukBlbCihC|zFscQf~F_lPvnGwkEvvNadEvtEe`F{r@ogBkpBo~B_{D_hKm[_mDiiAizIx/qePphGq}EqfBwlDrU_uIdwCovLbyG_lGxsOkoPtxT}lGfuC}mGhkL}tAzq/leBzhCejCx{Ejw@xzI}xAxgGknFhpNkkRv_Du}DpaA{oI}e@klCfp@goDszB{xC~a@idEmyEopBysLetCakA}aFeIuvCed@ivElb@kwDndEa|BjaHi~DfJcrFakEqn@fbBm|ClqBwmGprEceBez@}mLvcBijDstBq`Pi]ioMufB}gL{hB_sDcCuuCzqAqrRonOotCc}DuuDaMyfGunA_iExw@_bEqmImyAq_PcyJu`FwbR_`C}fMcO_iFvdF{dLaF}{[~eB{keAfF__c@oqDohJ_fCmxFsoCw`JvH_`Hr_As`L_}Eql`@_|]_iL{iFkzMe_BerKuuAwhCqwGc`C_bBiwBiH_|A`w@cqAnAsbMo]mvEa~BwiJ{SqzNtpAmzRv`IaoN`|NkbJpvGcgT~~GqbIpb@wgOaoAwkI|dDoeE_q@crKijBsbU_pA}xIno@{rEleEwzIjrKo_JoUemIfuC_eExFukFylCkjIwaCehMwkD_sHcpDggBkeF_sDql]iuFy`YsaEyiJozDe}Gy`GyaA}vBubA{S{dC}s@a_QevOypGyaLsOafJ{dDo`Fb@q`JxdGwqFzpAwlCllA">
+				<div class="overlay">
+					<div class="text">
+						View Itinerary
+					</div>
+				</div>
+			</div>
+			<p>My Trip</p><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span id="itinid" style="display:none">5a163916cda57838ddeada27</span>
+			<div>
+				<a>Delete this itinerary</a>
+				<div></div>
+			</div>
+		</div>
+		<div class="itinerary">
+			<div class="container">
+				<img src="https://maps.googleapis.com/maps/api/staticmap?&amp;size=400x400&amp;markers=color:red%7C34.0223519,-118.28511700000001&amp;markers=color:red%7C45.52306220000001,-122.67648150000002&amp;markers=color:red%7C47.6062095,-122.3320708&amp;path=weight:3%7Ccolor:blue%7Cenc:kfsnE`i~pUwoGyxF}yFngLqeFbiHksJxnFabMbvGuwJ~mJkxEnyH}qMhoGgwHvxBk_Gd`E_gLdwJm}KfaI_jE|xDsjN|sBusFlcMkrCa}B}aEb{C_|Hx{EqyP~pDw|l@vfp@aiw@nhgAcso@`_g@w|d@b}a@qmJxhNaiKnkPevg@~k]ebe@lqa@ugVhx/unSpqNm|b@|pX{vLrlNk}^t{Z{pUtvH_zPfbD_kM|eFu}MngLk`NlyQiyJxlCqzHn@y|JnAgqB_mBynK_tFgkIif@_cH`gBqoCdsEkt/~fKa~Gja@icTbdIm}e@tuG_xKjkC{tKexAa`JjaDk_CtkBwMhxNmqBz~WsbGhuJo~LtjMopJ`_LwsOp_Jmva@n_ViaMnqGugKpn@efd@teAslR|cCwr]su@szm@ic@_tk@niCyvNbcGufVt`CywLh[idMd|Ii`Ob_BueJ{RixO{jGs`DuIcrHvaAwaHddGo`F`oBaaDnrDqkBz|CykCiNctMw~FwwI{tHgjF{lCohCabD}vPyeFuoG`fImtLbrIckHx{AukBlbCihC|zFscQf~F_lPvnGwkEvvNadEvtEe`F{r@ogBkpBo~B_{D_hKm[_mDiiAizIx/qePphGq}EqfBwlDrU_uIdwCovLbyG_lGxsOkoPtxT}lGfuC}mGhkL}tAzq/leBzhCejCx{Ejw@xzI}xAxgGknFhpNkkRv_Du}DpaA{oI}e@klCfp@goDszB{xC~a@idEmyEopBysLetCakA}aFeIuvCed@ivElb@kwDndEa|BjaHi~DfJcrFakEqn@fbBm|ClqBwmGprEceBez@}mLvcBijDstBq`Pi]ioMufB}gL{hB_sDcCuuCzqAqrRonOotCc}DuuDaMyfGunA_iExw@_bEqmImyAq_PcyJu`FwbR_`C}fMcO_iFvdF{dLaF}{[~eB{keAfF__c@oqDohJ_fCmxFsoCw`JvH_`Hr_As`L_}Eql`@_|]_iL{iFkzMe_BerKuuAwhCqwGc`C_bBiwBiH_|A`w@cqAnAsbMo]mvEa~BwiJ{SqzNtpAmzRv`IaoN`|NkbJpvGcgT~~GqbIpb@wgOaoAwkI|dDoeE_q@crKijBsbU_pA}xIno@{rEleEwzIjrKo_JoUemIfuC_eExFukFylCkjIwaCehMwkD_sHcpDggBkeF_sDql]iuFy`YsaEyiJozDe}Gy`GyaA}vBubA{S{dC}s@a_QevOypGyaLsOafJ{dDo`Fb@q`JxdGwqFzpAwlCllA">
+				<div class="overlay">
+					<div class="text">
+						View Itinerary
+					</div>
+				</div>
+			</div>
+			<p>My Trip</p><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span id="itinid" style="display:none">5a163917cda57838ddeada29</span>
+			<div>
+				<a>Delete this itinerary</a>
+				<div></div>
+			</div>
+		</div>
+		<div class="itinerary">
+			<div class="container">
+				<img src="https://maps.googleapis.com/maps/api/staticmap?&amp;size=400x400&amp;markers=color:red%7C34.08595510000001,-118.26560990000002&amp;markers=color:red%7C34.0869317,-118.25566800000001&amp;path=weight:3%7Ccolor:blue%7Cenc:gl`oE`wypU`BgFxAmE`GqQX}@j@m@j@iBp@oBnAuDRI[GkJcFb@uA@A?CAGKGeCwAGMyAXgA/S@sEq@">
+				<div class="overlay">
+					<div class="text">
+						View Itinerary
+					</div>
+				</div>
+			</div>
+			<p>Test at 11/22 Night</p><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span id="itinid" style="display:none">5a166a86cda57838ddeada63</span>
+			<div>
+				<a>Delete this itinerary</a>
+				<div></div>
+			</div>
+		</div>
+		<div class="itinerary">
+			<div class="container">
+				<img src="https://maps.googleapis.com/maps/api/staticmap?&amp;size=400x400&amp;markers=color:red%7C32.8800604,-117.2340135&amp;markers=color:red%7C33.8120918,-117.91897419999998&amp;markers=color:red%7C34.42533049999999,-118.59721910000002&amp;markers=color:red%7C36.1699412,-115.13982959999998&amp;path=weight:3%7Ccolor:blue%7Cenc:ugsgE`fpjUmVmAcFcTe^_IwCmZ}CcPqQxMsJ`Si`@TaiAgQgbAnn@gcBny@kgCnSm_Ev_AmpBtQuk@xf@weBvaAamBddA}oE|}@yvBh~@afHljDinBhp@spD|_CarBntCkbBlm@q{AjeBicE|yDwrCtwBkcBjxBqbAz[kvBnzCqqFhkJ{iA|qCucCjjAo_D~sBueEblIgaAwPusAqaAks@oJi~Brq@wy@vp@ybCgIidGn@_tAjzC}dAbyAukDvyCywDl|B_zEjgDmjAziBozAdcDeb@nuAi`@hNos@tzAqw@ps@wuAndAy}AheB}|Bj|BiHxp@nIp@lB`CJh]l@oYiAqE}G}BmRrCo^dHwt@r{@q}@lfCagBdfEi{AnxCqnD`_I}gApwAe`Cj~A_nArs@gdAhlAicCzaB_cCb`Cw`BhwCgRtoByh@lgByXlt@g]tLg_C}b@}wAfWoi@pG}^jh@slB|gCkzAr|ByvD~~@}u@`f@}v@pw@euAnsA_vBdwCw{Bt{B}i@dt@uFtaA{VpgBycAdjDodCllCgwC`_CmbFhaFalAloAqq@xkAak@r}AudAnvB_uAfo@mhHj|BmVzK~MrRqDpc@kOnFbZ}SmHwj@vfGchB`bBg`A|kAk}@`fB}|EeTsTsjAmPa~@bJev@o]oiAohAiaCerE}gBgrBk|AecH_VsrBam@ut@w_BeyBg^_YyKmbB_pAceE_]__@{o@sa@ef@{kCyb@udAduA_iGaKecEzj@_`B~ButAgpAgjCsjAqmA{lDsjDcZcbC`DweEpcAy}Ad{@}v@`@yiFh@mqDvTo^h_Acy@nCwfAdAyxMvBg`Cnh@{~@j@y_FXgjF{EskR}h@saCcAamM@qwTqActRL_[_~AqSooBa}@}~@}fBi`G{oEybFisDqyD}jBqfBaLa~AfDmjCiiAwy@y^mlGcgGerFglHmm@aj@qdBw/mdFu`Aq|BghC}Y}tI}eBanCyUamAfe@a|FcK{tI{j@kxLmfB{rN}`EckLauLiaa@qrC_~FwaDmzFsd@ghE{U{qHez@kvCuNeyCk`AkfC}rCwhF{sJkoJm^{qDouEkiCwmCugBk`BgyCukBejCoxE}wIkdG__Lc~CaoNsfD_iPo|Igm^dQahE|QkfD{Jg_C`m@stDjFe}@whAuwBkoZizJ_lM}sAymFcsAydCkt@gqDsaCc~FozDa}Bg{BwtH}bJkqGefE}pBaaAumNmJkzKKwsDUabA_D_eAkv@_qAcaAmsAiPqY{uA`Io/pUzF">
+				<div class="overlay">
+					<div class="text">
+						View Itinerary
+					</div>
+				</div>
+			</div>
+			<p>San Diego to Las Vegas</p><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span id="itinid" style="display:none">5a132181cda5784e244ae3f9</span>
+			<div>
+				<a>Delete this itinerary</a>
+				<div></div>
+			</div>
+		</div>
+		<div class="itinerary">
+			<div class="container">
+				<img src="https://maps.googleapis.com/maps/api/staticmap?&amp;size=400x400&amp;markers=color:red%7C34.0223519,-118.28511700000001&amp;markers=color:red%7C33.83659319999999,-117.91430120000001&amp;markers=color:red%7C33.4936391,-117.14836479999997&amp;markers=color:red%7C32.8800604,-117.2340135&amp;path=weight:3%7Ccolor:blue%7Cenc:kfsnE`i~pU|Acn@tH{@tDf@bGXnPa@biByBtxAx@bcB@nt@?|g@kFrqAdBrpAjGrd@`ZbOrCx|A`@xt@wErmAuAfc@?hCpBi@nDcDF_@_~@eCcfAeA}vDj@icCbCe`AkCmh@{Mgb@wDcXKobAnD}w@i@mv@uDygBf@{y@pC_kA}Cqz@rBic@GsmCIkz@bCwr@vx@_zAf[ys@rSgq@dNch@tAm`A_@irCqDycBrH{i@fGgXp@kX[qt@v@u`DpA{MfD_FvEMhLK|DEdEuE?wY`BqFjNeDxYqGbT_F_Ecx@}AoNyQ|Dox@bR{PWqC}w@q@ys@dLyo@`Mu_@~M_`@nEwq@u^edC|AaV~IeP~Zid@p@iVkQ}h@uT_YaR{^cAe{@gAu_Aa^{`Akt@cnBcFix@aIilAxGan@vLag@tDwq@qA}a@{Oce@wXc`AxCma@xM}c@rIee@mDad@oHk[}k@sx@_L{^aZczBvQegAvHyiAy@ir@eJozApEe|@fJ{iBI{YwGw_@xAcO|KaIfd@wE~VeEjPyIb/g/xVsIn|@yFb_@x@nZ}Hzc@wT~/kW`eAerApsA}m@n}ColB~i@i_@xLyTnViVnLuPjIsZl_@cy@bc@s_@dRa_@nUos@bHik@nKgZfa@a{@`C_lA|RaaAx@wj@dOunAxVar@fVuWtWiNhc@gKdZwRv}@a{AnX}/~jAidA`Xu`@hQgi@r_@}w@n^me@l[}Xv|BcuA`~@al@|rDa`Dzn@el@rzBy`Dbw@_iAxw@{tAhZgo@j~@qm@z|Au}@vv@{c@doAoa@jHr@rEfGhHmC|GoEnE_GrGgNhEiBvLyK|j@eNpLcFdNqJh{@eUnmByGvm@lJlb@|Lpc@hYlh@fl@bn@n`@foBxtA`SpKfg@jNbt@oAbc@oOzPgMlj@qh@xYgM~a@qFdnDdArn@mMxg@wX|p@iN|uA_Dbh@Bf`@rJzz@p`@b`@~Hdh@SfiAe/dq@yTv`Coz@hpAsz@j`Boz@nyDmgB|V{Cv{@~@vkBtClh@qKvaBsw@~_Awk@fz@_~@dg@q/j_@iJve@kDrh@{@xXhFfW`Jhn@xC`hAzXv_@nIxkArCbmAnHdt@pOls@uCfUhAlYzLnjAxo@bMvKzKbQpQjq@b]|xAzLpw@rBpf@yDf{@yj@nfAi_@bdAwB~[xDdZhG`Nt]nWh[hU|IdQ~L`g@hK~b@~Upn@vUth@h/ziAh`@jiAlJjDh[iGpZwJ~U}R|UkYhu@_`@vVuDdp@hO~qAtGbi@rEfGjFbC~DGxK">
+				<div class="overlay">
+					<div class="text">
+						View Itinerary
+					</div>
+				</div>
+			</div>
+			<p>austin's trip</p><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span id="itinid" style="display:none">5a13283ecda5784e244ae40a</span>
+			<div>
+				<a>Delete this itinerary</a>
+				<div></div>
+			</div>
+		</div>
+		<div class="itinerary">
+			<div class="container">
+				<img src="https://maps.googleapis.com/maps/api/staticmap?&amp;size=400x400&amp;markers=color:red%7C34.0223519,-118.28511700000001&amp;markers=color:red%7C45.52306220000001,-122.67648150000002&amp;markers=color:red%7C47.6062095,-122.3320708&amp;path=weight:3%7Ccolor:blue%7Cenc:kfsnE`i~pUwoGyxF}yFngLqeFbiHksJxnFabMbvGuwJ~mJkxEnyH}qMhoGgwHvxBk_Gd`E_gLdwJm}KfaI_jE|xDsjN|sBusFlcMkrCa}B}aEb{C_|Hx{EqyP~pDw|l@vfp@aiw@nhgAcso@`_g@w|d@b}a@qmJxhNaiKnkPevg@~k]ebe@lqa@ugVhx/unSpqNm|b@|pX{vLrlNk}^t{Z{pUtvH_zPfbD_kM|eFu}MngLk`NlyQiyJxlCqzHn@y|JnAgqB_mBynK_tFgkIif@_cH`gBqoCdsEkt/~fKa~Gja@icTbdIm}e@tuG_xKjkC{tKexAa`JjaDk_CtkBwMhxNmqBz~WsbGhuJo~LtjMopJ`_LwsOp_Jmva@n_ViaMnqGugKpn@efd@teAslR|cCwr]su@szm@ic@_tk@niCyvNbcGufVt`CywLh[idMd|Ii`Ob_BueJ{RixO{jGs`DuIcrHvaAwaHddGo`F`oBaaDnrDqkBz|CykCiNctMw~FwwI{tHgjF{lCohCabD}vPyeFuoG`fImtLbrIckHx{AukBlbCihC|zFscQf~F_lPvnGwkEvvNadEvtEe`F{r@ogBkpBo~B_{D_hKm[_mDiiAizIx/qePphGq}EqfBwlDrU_uIdwCovLbyG_lGxsOkoPtxT}lGfuC}mGhkL}tAzq/leBzhCejCx{Ejw@xzI}xAxgGknFhpNkkRv_Du}DpaA{oI}e@klCfp@goDszB{xC~a@idEmyEopBysLetCakA}aFeIuvCed@ivElb@kwDndEa|BjaHi~DfJcrFakEqn@fbBm|ClqBwmGprEceBez@}mLvcBijDstBq`Pi]ioMufB}gL{hB_sDcCuuCzqAqrRonOotCc}DuuDaMyfGunA_iExw@_bEqmImyAq_PcyJu`FwbR_`C}fMcO_iFvdF{dLaF}{[~eB{keAfF__c@oqDohJ_fCmxFsoCw`JvH_`Hr_As`L_}Eql`@_|]_iL{iFkzMe_BerKuuAwhCqwGc`C_bBiwBiH_|A`w@cqAnAsbMo]mvEa~BwiJ{SqzNtpAmzRv`IaoN`|NkbJpvGcgT~~GqbIpb@wgOaoAwkI|dDoeE_q@crKijBsbU_pA}xIno@{rEleEwzIjrKo_JoUemIfuC_eExFukFylCkjIwaCehMwkD_sHcpDggBkeF_sDql]iuFy`YsaEyiJozDe}Gy`GyaA}vBubA{S{dC}s@a_QevOypGyaLsOafJ{dDo`Fb@q`JxdGwqFzpAwlCllA">
+				<div class="overlay">
+					<div class="text">
+						View Itinerary
+					</div>
+				</div>
+			</div>
+			<p>My Trip</p><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span id="itinid" style="display:none">5a163918cda57838ddeada2b</span>
+			<div>
+				<a>Delete this itinerary</a>
+				<div></div>
+			</div>
+		</div>
+		<div class="itinerary">
+			<div class="container">
+				<img src="https://maps.googleapis.com/maps/api/staticmap?&amp;size=400x400&amp;markers=color:red%7C34.0223519,-118.28511700000001&amp;markers=color:red%7C45.52306220000001,-122.67648150000002&amp;markers=color:red%7C47.6062095,-122.3320708&amp;path=weight:3%7Ccolor:blue%7Cenc:kfsnE`i~pUwoGyxF}yFngLqeFbiHksJxnFabMbvGuwJ~mJkxEnyH}qMhoGgwHvxBk_Gd`E_gLdwJm}KfaI_jE|xDsjN|sBusFlcMkrCa}B}aEb{C_|Hx{EqyP~pDw|l@vfp@aiw@nhgAcso@`_g@w|d@b}a@qmJxhNaiKnkPevg@~k]ebe@lqa@ugVhx/unSpqNm|b@|pX{vLrlNk}^t{Z{pUtvH_zPfbD_kM|eFu}MngLk`NlyQiyJxlCqzHn@y|JnAgqB_mBynK_tFgkIif@_cH`gBqoCdsEkt/~fKa~Gja@icTbdIm}e@tuG_xKjkC{tKexAa`JjaDk_CtkBwMhxNmqBz~WsbGhuJo~LtjMopJ`_LwsOp_Jmva@n_ViaMnqGugKpn@efd@teAslR|cCwr]su@szm@ic@_tk@niCyvNbcGufVt`CywLh[idMd|Ii`Ob_BueJ{RixO{jGs`DuIcrHvaAwaHddGo`F`oBaaDnrDqkBz|CykCiNctMw~FwwI{tHgjF{lCohCabD}vPyeFuoG`fImtLbrIckHx{AukBlbCihC|zFscQf~F_lPvnGwkEvvNadEvtEe`F{r@ogBkpBo~B_{D_hKm[_mDiiAizIx/qePphGq}EqfBwlDrU_uIdwCovLbyG_lGxsOkoPtxT}lGfuC}mGhkL}tAzq/leBzhCejCx{Ejw@xzI}xAxgGknFhpNkkRv_Du}DpaA{oI}e@klCfp@goDszB{xC~a@idEmyEopBysLetCakA}aFeIuvCed@ivElb@kwDndEa|BjaHi~DfJcrFakEqn@fbBm|ClqBwmGprEceBez@}mLvcBijDstBq`Pi]ioMufB}gL{hB_sDcCuuCzqAqrRonOotCc}DuuDaMyfGunA_iExw@_bEqmImyAq_PcyJu`FwbR_`C}fMcO_iFvdF{dLaF}{[~eB{keAfF__c@oqDohJ_fCmxFsoCw`JvH_`Hr_As`L_}Eql`@_|]_iL{iFkzMe_BerKuuAwhCqwGc`C_bBiwBiH_|A`w@cqAnAsbMo]mvEa~BwiJ{SqzNtpAmzRv`IaoN`|NkbJpvGcgT~~GqbIpb@wgOaoAwkI|dDoeE_q@crKijBsbU_pA}xIno@{rEleEwzIjrKo_JoUemIfuC_eExFukFylCkjIwaCehMwkD_sHcpDggBkeF_sDql]iuFy`YsaEyiJozDe}Gy`GyaA}vBubA{S{dC}s@a_QevOypGyaLsOafJ{dDo`Fb@q`JxdGwqFzpAwlCllA">
+				<div class="overlay">
+					<div class="text">
+						View Itinerary
+					</div>
+				</div>
+			</div>
+			<p>My Trip</p><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span id="itinid" style="display:none">5a16391acda57838ddeada2d</span>
+			<div>
+				<a>Delete this itinerary</a>
+				<div></div>
+			</div>
+		</div>
+		<div class="itinerary">
+			<div class="container">
+				<img src="https://maps.googleapis.com/maps/api/staticmap?&amp;size=400x400&amp;markers=color:red%7C34.0223519,-118.28511700000001&amp;markers=color:red%7C47.6062095,-122.3320708&amp;path=weight:3%7Ccolor:blue%7Cenc:kfsnE`i~pUwoGyxF}yFngLqeFbiHksJxnFabMbvGuwJ~mJkxEnyH}qMhoGgwHvxBk_Gd`E_gLdwJm}KfaI_jE|xDsjN|sBm|B`_JgvBjcBkrCa}B}aEb{C_vAbqA_eFtiCqyP~pDw|l@vfp@aiw@nhgAosUlsSs~XrjRw|d@b}a@qmJxhNaiKnkPevg@~k]ebe@lqa@ugVhx/unSpqNm|b@|pX{vLrlNk}^t{Z{pUtvH_zPfbD_kM|eFu}MngLk`NlyQiyJxlCqzHn@y|JnAgqB_mBynK_tFgkIif@_cH`gBqoCdsEkt/~fKa~Gja@icTbdIm}e@tuG_xKjkC{tKexAa`JjaDk_CtkBwMhxNcF`_UijBx~AsbGhuJo~LtjMopJ`_LwsOp_Jmva@n_ViaMnqGugKpn@efd@teAslR|cCwr]su@szm@ic@_tk@niCyvNbcGufVt`CywLh[idMd|Ii`Ob_BueJ{RixO{jGs`DuIcrHvaAerC|d@qnCf~Eo`F`oBaaDnrDqkBz|CykCiNctMw~FwwI{tHgjF{lCohCabD}vPyeFuoG`fImtLbrIckHx{AukBlbCihC|zFscQf~F_lPvnGwkEvvNadEvtEe`F{r@ogBkpBo~B_{D_hKm[_mDiiAizIx/qePphGq}EqfBwlDrUqqDx`@mbDjuBovLbyG_lGxsOkoPtxT}lGfuC}mGhkL}tAzq/leBzhCejCx{Ejw@xzI}xAxgGknFhpNg~F~gBclJvv@u}DpaA{oI}e@klCfp@goDszB{xC~a@idEmyEopBysLetCakA}aFeIuvCed@ivElb@kwDndEa|BjaHi~DfJcrFakEqn@fbBm|ClqBwmGprEceBez@}mLvcBijDstBq`Pi]gzGc_CatDlW}gL{hB_sDcCuuCzqAqrRonOotCc}DuuDaMyfGunA_iExw@_bEqmImyAq_PcyJu`FwbR_`C}fMcO_iFvdF{dLaF}{[~eB{keAfFs}Qor@k`P_~BohJ_fCmxFsoCw`JvH_`Hr_As`L_}Eql`@_|]_iL{iFkzMe_BerKuuAwhCqwGc`C_bB_xCslAeiMhlA}cO_kAyzIgjAsmXlkHkaL|jH}uNj{PmyPfoDqqIfhDedNqv@_rFg@_iIzaD_yMgpAgyNunB{`TxBcfMjcPsyFmN_|P~vEq`Vg_H_}SgaIm_DivByzDm}YqgF}k/sfLiuW{vJgfC_gAusIgBkpJwtEi|CmhOaeB{eK}fAq{DszBwdCd]w|FzjBq~H`tEw|FfgA">
+				<div class="overlay">
+					<div class="text">
+						View Itinerary
+					</div>
+				</div>
+			</div>
+			<p>My Trip</p><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span id="itinid" style="display:none">5a163957cda57838ddeada32</span>
+			<div>
+				<a>Delete this itinerary</a>
+				<div></div>
+			</div>
+		</div>
+		<div class="itinerary">
+			<div class="container">
+				<img src="https://maps.googleapis.com/maps/api/staticmap?&amp;size=400x400&amp;markers=color:red%7C34.0223519,-118.28511700000001&amp;markers=color:red%7C47.6062095,-122.3320708&amp;path=weight:3%7Ccolor:blue%7Cenc:kfsnE`i~pUwoGyxF}yFngLqeFbiHksJxnFabMbvGuwJ~mJkxEnyH}qMhoGgwHvxBk_Gd`E_gLdwJm}KfaI_jE|xDsjN|sBm|B`_JgvBjcBkrCa}B}aEb{C_vAbqA_eFtiCqyP~pDw|l@vfp@aiw@nhgAosUlsSs~XrjRw|d@b}a@qmJxhNaiKnkPevg@~k]ebe@lqa@ugVhx/unSpqNm|b@|pX{vLrlNk}^t{Z{pUtvH_zPfbD_kM|eFu}MngLk`NlyQiyJxlCqzHn@y|JnAgqB_mBynK_tFgkIif@_cH`gBqoCdsEkt/~fKa~Gja@icTbdIm}e@tuG_xKjkC{tKexAa`JjaDk_CtkBwMhxNcF`_UijBx~AsbGhuJo~LtjMopJ`_LwsOp_Jmva@n_ViaMnqGugKpn@efd@teAslR|cCwr]su@szm@ic@_tk@niCyvNbcGufVt`CywLh[idMd|Ii`Ob_BueJ{RixO{jGs`DuIcrHvaAerC|d@qnCf~Eo`F`oBaaDnrDqkBz|CykCiNctMw~FwwI{tHgjF{lCohCabD}vPyeFuoG`fImtLbrIckHx{AukBlbCihC|zFscQf~F_lPvnGwkEvvNadEvtEe`F{r@ogBkpBo~B_{D_hKm[_mDiiAizIx/qePphGq}EqfBwlDrUqqDx`@mbDjuBovLbyG_lGxsOkoPtxT}lGfuC}mGhkL}tAzq/leBzhCejCx{Ejw@xzI}xAxgGknFhpNg~F~gBclJvv@u}DpaA{oI}e@klCfp@goDszB{xC~a@idEmyEopBysLetCakA}aFeIuvCed@ivElb@kwDndEa|BjaHi~DfJcrFakEqn@fbBm|ClqBwmGprEceBez@}mLvcBijDstBq`Pi]gzGc_CatDlW}gL{hB_sDcCuuCzqAqrRonOotCc}DuuDaMyfGunA_iExw@_bEqmImyAq_PcyJu`FwbR_`C}fMcO_iFvdF{dLaF}{[~eB{keAfFs}Qor@k`P_~BohJ_fCmxFsoCw`JvH_`Hr_As`L_}Eql`@_|]_iL{iFkzMe_BerKuuAwhCqwGc`C_bB_xCslAeiMhlA}cO_kAyzIgjAsmXlkHkaL|jH}uNj{PmyPfoDqqIfhDedNqv@_rFg@_iIzaD_yMgpAgyNunB{`TxBcfMjcPsyFmN_|P~vEq`Vg_H_}SgaIm_DivByzDm}YqgF}k/sfLiuW{vJgfC_gAusIgBkpJwtEi|CmhOaeB{eK}fAq{DszBwdCd]w|FzjBq~H`tEw|FfgA">
+				<div class="overlay">
+					<div class="text">
+						View Itinerary
+					</div>
+				</div>
+			</div>
+			<p>USC to Seattle</p><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span id="itinid" style="display:none">5a1639dacda57838ddeada3d</span>
+			<div>
+				<a>Delete this itinerary</a>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<div class="tabcontent" id="shareditin" style="display: none;">
+		<h3>Itineraries shared with me</h3>
+	</div><!-- <div class="itinerary">
+            <img src="http://www.herl.pitt.edu/sites/default/files/images/map-close.jpg">
+            <p>itinerary_1</p>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+        </div> -->
+	<script src="js/itinerary.js">
+	</script>
+</body>
+</html>
