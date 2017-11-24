@@ -19,12 +19,12 @@ var renderItin = function(imagelink, itin_name, star_num, itinid) {
 	$container.append("<div class='overlay'><div class='text'>View Itinerary</div></div>")
 	$div.append($container);
 	$div.append("<p>"+itin_name+"</p>")
-	for(let i=0;i<star_num;++i) {
-		$div.append("<span class='fa fa-star checked'></span>");
-	}
-	for(let i=0;i<5-star_num;++i) {
-		$div.append("<span class='fa fa-star'></span>");
-	}
+	// for(let i=0;i<star_num;++i) {
+	// 	$div.append("<span class='fa fa-star checked'></span>");
+	// }
+	// for(let i=0;i<5-star_num;++i) {
+	// 	$div.append("<span class='fa fa-star'></span>");
+	// }
 	$div.append("<span id='itinid' style='display:none'>"+itinid+"</span>");
 	$div.append("<div><a>Delete this itinerary</a><div>")
 	$container.click(function() {
