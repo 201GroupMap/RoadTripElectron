@@ -77,6 +77,8 @@ $.get(endpoint+"PublicItinerary", function(data, status) {
 var user = store.get("user");
 if(user == null) {
 	$("#myitinbutton").hide();
+	$("#shareditinbutton").hide();
+	$("#newitinbutton").hide();
 	$("#publicitinbutton").click();
 }
 else {
@@ -88,13 +90,13 @@ else {
 			}
 			else noItin("myitin");
 		});
-	// wait for AWS to publish
-	// $.get(endpoint+"SharedItinerary/"+user_name, function(data, status) {
-	// 		if(data.length!=0) {
-	// 			parseItin("shareditin", data);
-	// 		}
-	// 		else noItin("shareditin");
-	// 	});
+	//wait for AWS to publish
+	$.get(endpoint+"SharedItinerary/"+user_name, function(data, status) {
+			if(data.length!=0) {
+				parseItin("shareditin", data);
+			}
+			else noItin("shareditin");
+		});
 	$("#myitinbutton").click();
 }
 
