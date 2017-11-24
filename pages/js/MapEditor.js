@@ -73,13 +73,18 @@ MapEditor.prototype.loadPreviousData = function (results) {
     this.getPlaceInfo(placeId, this.addStop.bind(this));
   }
   // Add shared users
-  for (let i = 0; i < results.shared_users; i++) {
+  for (let i = 0; i < results.shared_users.length; i++) {
     let username = results.shared_users[i];
-    this.shared_users.push(username);
+    // console.log("detected", username);
+    this.addSharedUser(username);
   }
   // Set the name
   this.name = results.name;
   $("#itinerary-name-input").val(results.name);
+  // Set the owner name
+  this.ownerName = results.owner_name;
+  $("#itinerary-owner").text(`By ${this.ownerName}`);
+  $("#modal-itinerary-owner").text(`Owner: ${this.ownerName}`);
 }
 
 MapEditor.prototype.initMap = function () {

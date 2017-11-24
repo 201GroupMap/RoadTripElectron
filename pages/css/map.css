@@ -9,6 +9,12 @@ h3 {
   margin-top: 10px;
   color: #484848; }
 
+#itinerary-owner {
+  margin-bottom: 10px;
+  margin-top: 0px;
+  color: rgba(0, 0, 0, 0.64);
+  margin-left: 10px; }
+
 .infowindow-img-wrapper {
   float: left; }
 
