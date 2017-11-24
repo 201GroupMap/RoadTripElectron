@@ -117,3 +117,7 @@ div.text {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+div.delete button{
+  cursor: pointer;
+}

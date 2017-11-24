@@ -14,11 +14,11 @@ var openItin = function(type) {
 var renderItin = function(imagelink, itin_name, star_num, itinid) {
 	//console.log(itinid);
 	let $div = $("<div>", {class:"itinerary"});
-	let $container = $("<div>", {class:"container"})
+	let $container = $("<div>", {class:"container"});
 	$container.append("<img src="+imagelink+">");
-	$container.append("<div class='overlay'><div class='text'>View Itinerary</div></div>")
+	$container.append("<div class='overlay'><div class='text'>View Itinerary</div></div>");
 	$div.append($container);
-	$div.append("<p>"+itin_name+"</p>")
+	$div.append("<p>"+itin_name+"</p>");
 	// for(let i=0;i<star_num;++i) {
 	// 	$div.append("<span class='fa fa-star checked'></span>");
 	// }
@@ -26,12 +26,24 @@ var renderItin = function(imagelink, itin_name, star_num, itinid) {
 	// 	$div.append("<span class='fa fa-star'></span>");
 	// }
 	$div.append("<span id='itinid' style='display:none'>"+itinid+"</span>");
-	$div.append("<div><a>Delete this itinerary</a><div>")
+	let $delete = $("<div>", {class:"delete"});
+	$delete.append("<button class='deletebutton'>Delete</button>");
+	$div.append($delete);
+	//$div.append("<div><a>Delete this itinerary</a><div>")
 	$container.click(function() {
 		store.set("itinid", $(this).parent().find("#itinid").text());
 		window.location = "map.html";
 		return false;
-	})
+	});
+	$delete.click(function() {
+		$.ajax({
+			url: endpoint+'Itinerary/'+$(this).parent().find("#itinid").text(),
+			type: 'DELETE',
+			success: function(result) {
+			}
+		});
+		$(".itinerary:contains('"+$(this).parent().find("#itinid").text()+"')").hide();
+	});
 	return $div;
 }
 
