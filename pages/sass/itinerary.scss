@@ -43,7 +43,7 @@ div.tabcontent {
     /*border: 1px solid #ccc;*/
 }
 
-div.itinerary-panel {
+div.itinerary {
     width: 200px;
     text-align: center;
     display: inline-block;
@@ -62,7 +62,7 @@ div.itinerary img {
     padding-right: 2px;
 }
 
-div.image-wrapper {
+div.container {
   position: relative;
   width: 100%;
 }
@@ -79,6 +79,10 @@ div.overlay {
   transition: .5s ease;
   background-color: #e4e4e4;
   cursor: pointer;
+}
+
+.container:hover .overlay {
+  opacity: 0.8;
 }
 
 div.text {
@@ -112,4 +116,8 @@ div.text {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+div.delete button{
+  cursor: pointer;
 }
