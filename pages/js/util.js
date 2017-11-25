@@ -8,5 +8,6 @@ function getItineraryId () {
 
 function getUsername () {
   let user = store.get("user");
+  if (user == null) return null;
   return user.name;
 }
