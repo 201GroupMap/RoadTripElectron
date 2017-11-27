@@ -234,11 +234,12 @@ img.infowindow-img {
   margin-left: 0;
 
   .info-panel-button {
-    cursor: pointer;
+    cursor: default;
   }
 }
 
 .info-panel-button-hoverable {
+  cursor: pointer !important;
   transition: all 0.2s ease;
   &:hover {
     color: white;
