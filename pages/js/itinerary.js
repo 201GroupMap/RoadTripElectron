@@ -25,18 +25,16 @@ var renderItin = function(imagelink, itin_name, star_num, itinid) {
 	// for(let i=0;i<5-star_num;++i) {
 	// 	$div.append("<span class='fa fa-star'></span>");
 	// }
-
+	$div.append("<span id='itinid' style='display:none'>"+itinid+"</span>");
 	let $delete = $("<div>", {class:"delete"});
 	$delete.append("<button class='deletebutton'>Delete</button>");
 	$div.append($delete);
 	//$div.append("<div><a>Delete this itinerary</a><div>")
-
 	$container.click(function() {
-		store.set("itinid", itinid);
+		store.set("itinid", $(this).parent().find("#itinid").text());
 		window.location = "map.html";
 		return false;
 	});
-
 	$delete.click(function() {
 		$.ajax({
 			url: endpoint+'Itinerary/'+$(this).parent().find("#itinid").text(),
