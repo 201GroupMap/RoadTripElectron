@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 const Store = require('electron-store');
 const store = new Store();
@@ -11,7 +11,7 @@ var openItin = function(type) {
 	$("#"+type+"button").addClass("active");
 };
 
-var renderItin = function(imagelink, itin_name, star_num, itinid) {
+var renderItin = function(imagelink, itin_name, star_num, itinid, ownerName) {
 	//console.log(itinid);
 	let $div = $("<div>", {class:"itinerary"});
 	let $container = $("<div>", {class:"container"});
@@ -32,6 +32,7 @@ var renderItin = function(imagelink, itin_name, star_num, itinid) {
 	//$div.append("<div><a>Delete this itinerary</a><div>")
 	$container.click(function() {
 		store.set("itinid", $(this).parent().find("#itinid").text());
+		store.set("ownerName", ownerName);
 		window.location = "map.html";
 		return false;
 	});
@@ -52,15 +53,15 @@ var parseItin = function(type, itin_json) {
 		for(let i=0;i<itin_json.length;++i) {
 			let tempitin = JSON.parse(itin_json[i]);
 			$("#"+type).append(
-				renderItin(tempitin.thumbnail_url, tempitin.name, 
-				3, tempitin._id.$oid));
+				renderItin(tempitin.thumbnail_url, tempitin.name,
+				3, tempitin._id.$oid, tempitin.owner_name));
 		}
 	}
 	else {
 		let tempitin = JSON.parse(itin_json);
 		$("#"+type).append(
-				renderItin(tempitin.thumbnail_url, tempitin.name, 
-				3, tempitin._id.$oid));
+				renderItin(tempitin.thumbnail_url, tempitin.name,
+				3, tempitin._id.$oid, tempitin.owner_name));
 	}
 }
 
