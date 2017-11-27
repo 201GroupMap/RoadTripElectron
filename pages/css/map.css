@@ -180,17 +180,14 @@ img.infowindow-img {
   background-color: white;
   margin-left: 0; }
   #info-panel-buttons-wrapper .info-panel-button {
-    cursor: pointer;
-    /*
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 25px;
-    */
-    transition: all 0.2s ease; }
-    #info-panel-buttons-wrapper .info-panel-button:hover {
-      color: white;
-      background-color: #fd5c63;
-      border-color: #fd5c63; }
+    cursor: pointer; }
+
+.info-panel-button-hoverable {
+  transition: all 0.2s ease; }
+  .info-panel-button-hoverable:hover {
+    color: white;
+    background-color: #fd5c63;
+    border-color: #fd5c63; }
 
 .col-md-4 {
   padding-left: 0;

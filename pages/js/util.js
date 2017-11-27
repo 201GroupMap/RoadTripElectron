@@ -11,3 +11,7 @@ function getUsername () {
   if (user == null) return null;
   return user.name;
 }
+
+function getEditAccess() {
+  return store.get("editAccess");
+}

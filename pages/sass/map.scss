@@ -235,18 +235,15 @@ img.infowindow-img {
 
   .info-panel-button {
     cursor: pointer;
-    /*
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 25px;
-    */
-    transition: all 0.2s ease;
+  }
+}
 
-    &:hover {
-      color: white;
-      background-color: $red;
-      border-color: $red;
-    }
+.info-panel-button-hoverable {
+  transition: all 0.2s ease;
+  &:hover {
+    color: white;
+    background-color: $red;
+    border-color: $red;
   }
 }
 

@@ -37,12 +37,22 @@ $(document).ready(function () {
     $("#settings-modal").modal("show");
   });
 
-  $("#save-button").click(function () {
-    m.save();
+  if (getEditAccess()) {
+    // User has edit access
+    $("#save-button").click(function () {
+      m.save();
+      $("#save-icon").removeClass("fa-floppy-o");
+      $("#save-icon").addClass("fa-refresh");
+      $("#save-icon").addClass("fa-spin");
+    });
+  } else {
+    // User does not have edit access
+    console.log("User does not have edit access, disabling save button");
+    $("#save-button").removeClass("info-panel-button-hoverable");
+    $("#save-button").css("color", "rgba(0, 0, 0, 0.5)");
     $("#save-icon").removeClass("fa-floppy-o");
-    $("#save-icon").addClass("fa-refresh");
-    $("#save-icon").addClass("fa-spin");
-  });
+    $("#save-icon").addClass("fa-ban");
+  }
 
   $("#shared-users-input").on("keyup", function (e) {
     if (e.keyCode == 13) {
