@@ -355,7 +355,9 @@ MapEditor.prototype.save = function () {
 }
 
 MapEditor.prototype.getOwnerName = function () {
-  this.ownerName = "Zexia Zhang";
+  if (this.ownerName == null) {
+    this.ownerName = getUsername();
+  }
   return this.ownerName;
 }
 
