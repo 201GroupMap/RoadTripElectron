@@ -70,8 +70,8 @@ MapEditor.prototype.checkChanged = function () {
           this.getPlaceInfo(results.endId, this.addEnd.bind(this));
         }
         // Check stops
-        if(!checkArrayChanged(results.stops, Array.from(this.stops.keys()))) {
-          removeAllStops();
+        if(!this.checkArrayChanged(results.stops, Array.from(this.stops.keys()))) {
+          this.removeAllStops();
           for (let i = 0; i < results.stops.length; i++) {
             let placeId = results.stops[i];
             this.getPlaceInfo(placeId, this.addStop.bind(this));
