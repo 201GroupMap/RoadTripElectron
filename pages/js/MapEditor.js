@@ -57,18 +57,20 @@ MapEditor.prototype.checkChanged = function () {
     context: this,
     success: function (results) {
       //callback.call(this, results);
-      if(results.lastModified.$date != this.lastModified) {
+      if(results.lastModified.$date != this.lastModifiedDate) {
         console.log("changed");
         // Check start
         if(results.startId!=this.data.start.place_id) {
+          console.log("Start changed, updating");
           this.getPlaceInfo(results.startId, this.addStart.bind(this));
         }
         // Check end
         if(results.endId!=this.data.end.place_id) {
+          console.log("End changed, updating");
           this.getPlaceInfo(results.endId, this.addEnd.bind(this));
         }
         // Check stops
-        if(!checkstopChanged(results.stops, Array.from(this.stops.keys()))) {
+        if(!checkArrayChanged(results.stops, Array.from(this.stops.keys()))) {
           removeAllStops();
           for (let i = 0; i < results.stops.length; i++) {
             let placeId = results.stops[i];
@@ -76,7 +78,6 @@ MapEditor.prototype.checkChanged = function () {
           }
         }
         // Check shared users
-
       }
     }
   });
@@ -128,7 +129,7 @@ MapEditor.prototype.loadPreviousData = function (results) {
   $("#itinerary-owner").text(`By ${this.ownerName}`);
   $("#modal-itinerary-owner").text(`Owner: ${this.ownerName}`);
   // Set the time stamp
-  this.lastModified = results.lastModified.$date;
+  this.lastModifiedDate = results.lastModified.$date;
 }
 
 MapEditor.prototype.initMap = function () {
