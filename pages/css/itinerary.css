@@ -14,7 +14,7 @@ div.tab button {
   border: 0px solid #ccc;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 14px 20px;
   transition: 0.3s;
   font-size: 17px; }
 
@@ -49,6 +49,7 @@ div.itinerary {
   margin: 6px; }
 
 div.itinerary img {
+  border-radius: 10px;
   width: 100%; }
 
 .checked {
@@ -108,10 +109,13 @@ div.text {
   display: block; }
 
 div.delete button {
+  background-color: white;
+  border: 1px solid #FCFCFC;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
   cursor: pointer; }
 
 div.itinerary {
-  border: 1px solid #ef484f;
+  border: 1px solid rgba(239,72,79, 0.5);
   border-radius: 10px;
 }
 
@@ -120,18 +124,10 @@ div.itinerary {
   float: left;
 }
 
-div.containerCreate {
-  position: relative;
-  width: 100%; }
-
-.containerCreate:hover .overlay {
-  opacity: 0.8;
-} 
-
 .fa-plus {
   margin-top: 100px;
-  margin-left: 5px;
-  margin-bottom: 100px;
+  margin-left: 6px;
+  margin-bottom: 95px;
   color: white;
 }
 /*# sourceMappingURL=itinerary.css.map */

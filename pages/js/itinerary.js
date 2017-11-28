@@ -13,12 +13,12 @@ var openItin = function(type) {
 	$("#"+type+"button").addClass("active");
 };
 
-var renderItin = function(imagelink, itin_name, star_num, itinid, editAccess) {
+var renderItin = function(imagelink, itin_name, star_num, itinid, editAccess, type) {
 	//console.log(itinid);
 	let $div = $("<div>", {class:"itinerary"});
 	let $container = $("<div>", {class:"container"});
 	$container.append("<img src="+imagelink+">");
-	$container.append("<div class='overlay'><div class='text'>View Itinerary</div></div>");
+	$container.append("<div class='overlay'><div class='text'>View</div></div>");
 	$div.append($container);
 	$div.append("<p>"+itin_name+"</p>");
 	// for(let i=0;i<star_num;++i) {
@@ -29,7 +29,9 @@ var renderItin = function(imagelink, itin_name, star_num, itinid, editAccess) {
 	// }
 	$div.append("<span id='itinid' style='display:none'>"+itinid+"</span>");
 	let $delete = $("<div>", {class:"delete"});
-	$delete.append("<button class='deletebutton'>Delete</button>");
+	if(type == 'myitin'){
+		$delete.append("<button class='deletebutton btn btn-default'>Delete</button>");
+	}
 	$div.append($delete);
 	//$div.append("<div><a>Delete this itinerary</a><div>")
 	$container.click(function() {
@@ -57,7 +59,7 @@ var parseItin = function(type, itin_json) {
 			let editAccess = hasEditAccess(tempitin, getUsername());
 			$("#"+type).append(
 				renderItin(tempitin.thumbnail_url, tempitin.name,
-				3, tempitin._id.$oid, editAccess));
+				3, tempitin._id.$oid, editAccess, type));
 		}
 	}
 	else {
@@ -65,12 +67,13 @@ var parseItin = function(type, itin_json) {
 		let editAccess = hasEditAccess(tempitin, getUsername());
 		$("#"+type).append(
 				renderItin(tempitin.thumbnail_url, tempitin.name,
-				3, tempitin._id.$oid, editAccess));
+				3, tempitin._id.$oid, editAccess, type));
 	}
 }
 
 var noItin = function(type) {
-	$("#"+type).append("<p>No itineraries available</p>");
+	//$("#"+type).append("<p>No itineraries available</p>");
+	// don't do anything
 }
 
 var newItin = function() {
