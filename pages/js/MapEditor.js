@@ -58,6 +58,7 @@ MapEditor.prototype.checkChanged = function () {
     success: function (results) {
       //callback.call(this, results);
       if(results.lastModified.$date != this.lastModifiedDate) {
+        this.lastModifiedDate = results.lastModified.$date;
         console.log("changed");
         // Check start
         if(results.startId!=this.data.start.place_id) {
