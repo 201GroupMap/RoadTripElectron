@@ -47,36 +47,42 @@ MapEditor.prototype.init = function () {
     this.getPreviousData(this.loadPreviousData);
   }
 
-  //setInterval(checkChanged(), 1000);
+  if (getItineraryId()) {
+    setInterval(this.checkChanged.bind(this), 500);
+  }
 }
 
 MapEditor.prototype.checkChanged = function () {
+  console.log("requesting");
   $.get({
     url: BACKEND_URL + "/Itinerary" + "/" + getItineraryId(),
     dataType: "json",
     context: this,
     success: function (results) {
       //callback.call(this, results);
-      if(results.lastModified.$date != this.lastModified) {
+      if(results.lastModified.$date != this.lastModifiedDate) {
+        this.lastModifiedDate = results.lastModified.$date;
         console.log("changed");
         // Check start
         if(results.startId!=this.data.start.place_id) {
+          console.log("Start changed, updating");
           this.getPlaceInfo(results.startId, this.addStart.bind(this));
         }
         // Check end
         if(results.endId!=this.data.end.place_id) {
+          console.log("End changed, updating");
           this.getPlaceInfo(results.endId, this.addEnd.bind(this));
         }
         // Check stops
-        if(!checkstopChanged(results.stops, Array.from(this.stops.keys()))) {
-          removeAllStops();
+        if(!this.checkArrayChanged(results.stops, Array.from(this.stops.keys()))) {
+          this.removeAllStops();
           for (let i = 0; i < results.stops.length; i++) {
             let placeId = results.stops[i];
             this.getPlaceInfo(placeId, this.addStop.bind(this));
           }
         }
         // Check shared users
-
+        m.drawRoute();
       }
     }
   });
@@ -128,7 +134,14 @@ MapEditor.prototype.loadPreviousData = function (results) {
   $("#itinerary-owner").text(`By ${this.ownerName}`);
   $("#modal-itinerary-owner").text(`Owner: ${this.ownerName}`);
   // Set the time stamp
-  this.lastModified = results.lastModified.$date;
+  this.lastModifiedDate = results.lastModified.$date;
+  // Set visibility
+  $("#visibility-select").children("option").prop("selected", false);
+  if (results.public) {
+    $("#visibility-public").prop("selected", true);
+  } else {
+    $("#visibility-private").prop("selected", true);
+  }
 }
 
 MapEditor.prototype.initMap = function () {
