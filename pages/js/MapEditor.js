@@ -46,6 +46,48 @@ MapEditor.prototype.init = function () {
     this.id = getItineraryId();
     this.getPreviousData(this.loadPreviousData);
   }
+
+  //setInterval(checkChanged(), 1000);
+}
+
+MapEditor.prototype.checkChanged = function () {
+  $.get({
+    url: BACKEND_URL + "/Itinerary" + "/" + getItineraryId(),
+    dataType: "json",
+    context: this,
+    success: function (results) {
+      //callback.call(this, results);
+      if(results.lastModified.$date != this.lastModified) {
+        console.log("changed");
+        // Check start
+        if(results.startId!=this.data.start.place_id) {
+          this.getPlaceInfo(results.startId, this.addStart.bind(this));
+        }
+        // Check end
+        if(results.endId!=this.data.end.place_id) {
+          this.getPlaceInfo(results.endId, this.addEnd.bind(this));
+        }
+        // Check stops
+        if(!checkstopChanged(results.stops, Array.from(this.stops.keys()))) {
+          removeAllStops();
+          for (let i = 0; i < results.stops.length; i++) {
+            let placeId = results.stops[i];
+            this.getPlaceInfo(placeId, this.addStop.bind(this));
+          }
+        }
+        // Check shared users
+
+      }
+    }
+  });
+}
+
+MapEditor.prototype.checkArrayChanged = function (arr1, arr2) {
+  if(arr1.length!=arr2.length) return false;
+  for(var i=0;i<arr1.length;i++) {
+    if(arr1[i]!=arr2[i]) return false;
+  }
+  return true;
 }
 
 MapEditor.prototype.getPreviousData = function (callback) {
@@ -85,6 +127,8 @@ MapEditor.prototype.loadPreviousData = function (results) {
   this.ownerName = results.owner_name;
   $("#itinerary-owner").text(`By ${this.ownerName}`);
   $("#modal-itinerary-owner").text(`Owner: ${this.ownerName}`);
+  // Set the time stamp
+  this.lastModified = results.lastModified.$date;
 }
 
 MapEditor.prototype.initMap = function () {
@@ -277,6 +321,14 @@ MapEditor.prototype.removeStop = function (placeId) {
     $("#stops-panel").slideUp("fast");
   }
   this.drawRoute();
+}
+
+MapEditor.prototype.removeAllStops = function () {
+  let keys = Array.from(this.stops.keys());
+  for (let i = 0; i < keys.length; i++) {
+    let placeId = keys[i];
+    this.removeStop(placeId);
+  }
 }
 
 MapEditor.prototype.getThumbnailURL = function () {
