@@ -48,7 +48,7 @@ MapEditor.prototype.init = function () {
   }
 
   if (getItineraryId()) {
-    setInterval(this.checkChanged.bind(this), 200);
+    setInterval(this.checkChanged.bind(this), 500);
   }
 }
 
