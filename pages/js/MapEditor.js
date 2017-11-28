@@ -47,10 +47,13 @@ MapEditor.prototype.init = function () {
     this.getPreviousData(this.loadPreviousData);
   }
 
-  setInterval(this.checkChanged.bind(this), 300);
+  if (getItineraryId()) {
+    setInterval(this.checkChanged.bind(this), 1000);
+  }
 }
 
 MapEditor.prototype.checkChanged = function () {
+  console.log("requesting");
   $.get({
     url: BACKEND_URL + "/Itinerary" + "/" + getItineraryId(),
     dataType: "json",
@@ -79,6 +82,7 @@ MapEditor.prototype.checkChanged = function () {
           }
         }
         // Check shared users
+        m.drawRoute();
       }
     }
   });
@@ -131,6 +135,13 @@ MapEditor.prototype.loadPreviousData = function (results) {
   $("#modal-itinerary-owner").text(`Owner: ${this.ownerName}`);
   // Set the time stamp
   this.lastModifiedDate = results.lastModified.$date;
+  // Set visibility
+  $("#visibility-select").children("option").prop("selected", false);
+  if (results.public) {
+    $("#visibility-public").prop("selected", true);
+  } else {
+    $("#visibility-private").prop("selected", true);
+  }
 }
 
 MapEditor.prototype.initMap = function () {
