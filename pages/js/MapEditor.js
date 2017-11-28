@@ -290,6 +290,7 @@ MapEditor.prototype.addStop = function (place) {
   let placeId = place.place_id;
   console.log("Adding new stop", place);
   this.stops.set(placeId, place);
+  this.drawRoute();
   let stopDiv = $(`
     <div id="${placeId}" class="panel-content" style="display: none;">
       <div class="panel-img-wrapper">
@@ -324,7 +325,6 @@ MapEditor.prototype.addStop = function (place) {
     // show Stops panel
     $("#stops-panel").slideDown("fast");
   }
-  this.drawRoute();
 }
 
 MapEditor.prototype.removeStop = function (placeId) {
@@ -632,6 +632,7 @@ MapEditor.prototype.addEnd = function (place) {
 }
 
 MapEditor.prototype.drawRoute = function () {
+  // console.log("context is", this);
   if (typeof(this.data.start) === "undefined" ||
       typeof(this.data.end) === "undefined") {
     return;
@@ -644,6 +645,10 @@ MapEditor.prototype.drawRoute = function () {
     travelMode: "DRIVING"
   };
   this.directionsService.route(request, (result, status) => {
+    if (result.geocoded_waypoints.length !== (2 + Array.from(this.stops.keys()).length)) {
+      console.log("aborting draw request due to outdated data");
+      return;
+    }
     console.log("Drawing new route");
     console.log(result);
     this.directions = result;
