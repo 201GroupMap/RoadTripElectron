@@ -47,7 +47,7 @@ MapEditor.prototype.init = function () {
     this.getPreviousData(this.loadPreviousData);
   }
 
-  //setInterval(checkChanged(), 1000);
+  setInterval(checkChanged(), 300);
 }
 
 MapEditor.prototype.checkChanged = function () {
