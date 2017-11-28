@@ -142,6 +142,7 @@ MapEditor.prototype.loadPreviousData = function (results) {
   } else {
     $("#visibility-private").prop("selected", true);
   }
+  this.drawRoute();
 }
 
 MapEditor.prototype.initMap = function () {
